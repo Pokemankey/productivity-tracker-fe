@@ -1,21 +1,19 @@
+const API_URL = "http://localhost:3000";
 
 export async function apiFetch(path: string, options: RequestInit = {}) {
-    const baseUrl = "http://localhost:3000";
+  const res = await fetch(`${API_URL}${path}`, {
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+      ...(options.headers || {}),
+    },
+    ...options,
+  });
 
-    const accessToken = typeof window !== "undefined"
-        ? localStorage.getItem("access_token")
-        : null;
+  if (!res.ok) {
+    const error = await res.json().catch(() => ({}));
+    throw new Error(error.message || "Something went wrong");
+  }
 
-    const headers = {
-        "Content-Type": "application/json",
-        ...(accessToken ? { Authorization: `Bearer ${accessToken}`}: {}),
-        ...options.headers,
-    };
-
-    const res = await fetch(`${baseUrl}${path}`, {
-        ...options,
-        headers,
-    });
-
-    
+  return res.json();
 }
