@@ -8,12 +8,10 @@ export default function Hero() {
     <section className="w-full bg-[#EEF2FF] py-24">
       <div className="mx-auto flex max-w-7xl flex-col gap-12 px-10 md:flex-row md:items-center">
         <div className="flex flex-col items-center gap-6 md:w-1/2 md:items-start">
-          {/* Badge */}
           <div className="w-fit rounded-full bg-indigo-100 px-4 py-1.5 text-xs font-medium tracking-wide text-indigo-700">
             AI-Powered Productivity
           </div>
 
-          {/* Headline */}
           <h1 className="text-center text-4xl leading-tight font-extrabold text-black md:max-w-lg md:text-left md:text-4xl lg:text-5xl">
             Achieve Your Goals <br />
             with{" "}
@@ -22,13 +20,11 @@ export default function Hero() {
             </span>
           </h1>
 
-          {/* Supporting Text */}
           <p className="max-w-md text-center text-base leading-relaxed text-gray-600/90 md:max-w-lg md:text-left md:text-lg">
             Set goals, break them into tasks, track your sessions, and let AI
             guide your path to success. All in one workspace.
           </p>
 
-          {/* CTA Button */}
           <div className="flex w-full justify-center md:max-w-lg">
             <Button size="lg">Get Started</Button>
           </div>

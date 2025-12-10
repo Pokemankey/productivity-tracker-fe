@@ -6,7 +6,6 @@ export default function Navbar() {
   return (
     <nav className="sticky top-0 z-50 w-full border-b border-gray-200 bg-white/80 backdrop-blur">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-        {/*Logo*/}
         <div className="flex items-center gap-2">
           <Image src="/logo.svg" alt="FlowState logo" width={40} height={40} />
           <span className="bg-linear-to-br from-indigo-600 to-purple-600 bg-clip-text text-2xl font-semibold text-transparent">

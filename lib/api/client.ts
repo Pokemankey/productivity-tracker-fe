@@ -1,6 +1,21 @@
 const API_URL = "http://localhost:3000";
 
-export async function apiFetch(path: string, options: RequestInit = {}) {
+async function refreshSession() {
+  const res = await fetch(`${API_URL}/auth/refresh`, {
+    method: "POST",
+    credentials: "include",
+  });
+
+  if (!res.ok) {
+    throw new Error("Refresh failed");
+  }
+}
+
+export async function apiFetch(
+  path: string,
+  options: RequestInit = {},
+  retry = true,
+) {
   const res = await fetch(`${API_URL}${path}`, {
     credentials: "include",
     headers: {
@@ -9,6 +24,16 @@ export async function apiFetch(path: string, options: RequestInit = {}) {
     },
     ...options,
   });
+
+  if (res.status === 401 && retry) {
+    try {
+      await refreshSession();
+      return apiFetch(path, options, false);
+    } catch {
+      window.location.href = "/login";
+      throw new Error("Session expired");
+    }
+  }
 
   if (!res.ok) {
     const error = await res.json().catch(() => ({}));

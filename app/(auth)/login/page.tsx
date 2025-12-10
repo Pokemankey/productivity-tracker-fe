@@ -3,16 +3,29 @@
 import { useState } from "react";
 import Input from "@/components/ui/Input";
 import Image from "next/image";
+import { apiFetch } from "@/lib/api/client";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle login logic here
-    console.log("Login:", { email, password, rememberMe });
+
+    try {
+      await apiFetch("/auth/login", {
+        method: "POST",
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      });
+
+      window.location.href = "/dashboard";
+    } catch (err: any) {
+      alert(err.message);
+    }
   };
 
   const handleGoogleLogin = () => {
@@ -27,7 +40,6 @@ export default function LoginPage() {
 
   return (
     <div className="w-full max-w-md rounded-2xl bg-white p-8 shadow-xl md:p-10">
-      {/* Header */}
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-gray-900 md:text-4xl">
           Welcome Back
@@ -108,7 +120,6 @@ export default function LoginPage() {
         </button>
       </div>
 
-      {/* Sign Up Link */}
       <p className="mt-6 text-center text-sm text-gray-600">
         Don't have an account?{" "}
         <a
