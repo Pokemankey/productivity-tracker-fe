@@ -14,12 +14,12 @@ export default function Button({
   disabled,
 }: ButtonProps) {
   let base =
-    "rounded-2xl cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed transition";
+    "rounded-2xl cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed transition flex items-center";
 
   let sizeStyles = {
-    sm: "",
-    md: "px-6 py-3 text-md",
-    lg: "px-10 py-4 text-xl",
+    sm: "rounded-lg px-6 py-2 text-md",
+    md: "rounded-2xl px-6 py-3 text-md",
+    lg: "rounded-2xl px-10 py-4 text-xl",
   };
 
   let styles = {

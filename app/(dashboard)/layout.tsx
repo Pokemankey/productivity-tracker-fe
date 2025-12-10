@@ -10,7 +10,7 @@ export default async function AuthLayout({
   const user = await getCurrentUser();
 
   return (
-    <div className="flex">
+    <div className="flex overflow-hidden bg-gray-100">
       <SideBar user={user} />
       <main className="flex-1">{children}</main>
     </div>
