@@ -4,10 +4,14 @@ import RecentGoals from "@/components/Dashboard/RecentGoals";
 import Statistics from "@/components/Dashboard/Statistics";
 import UpcomingDeadlines from "@/components/Dashboard/UpcomingDeadlines";
 
-export default function DashboardPage() {
+import { getCurrentUser } from "@/lib/auth/auth";
+
+export default async function DashboardPage() {
+  const user = await getCurrentUser();
+
   return (
     <div className="flex h-screen flex-col">
-      <DashboardTopbar />
+      <DashboardTopbar user={user} />
       <Statistics />
 
       <div className="flex gap-10 overflow-hidden p-5">

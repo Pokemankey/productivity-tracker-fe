@@ -3,7 +3,7 @@
 type SideBarProps = {
   user: {
     username: string;
-    email?: string;
+    email: string;
   };
 };
 
@@ -98,17 +98,21 @@ export default function SideBar({ user }: SideBarProps) {
         </div>
 
         <div className="mb-5 -ml-6 w-70 border border-gray-200"></div>
-        <div className="flex gap-2.5">
-          <Image
-            src="/TheKnight.png"
-            alt="Profile Picture"
-            width={55}
-            height={55}
-            className="rounded-full"
-          />
-          <div className="flex flex-col justify-center">
-            <p className="md:text-md font-semibold">{user.email}</p>
-            <p className="md:text-md text-gray-500">Free User</p>
+        <div className="flex justify-between gap-2.5">
+          <div className="flex gap-2.5">
+            <Image
+              src="/TheKnight.png"
+              alt="Profile Picture"
+              width={55}
+              height={55}
+              className="rounded-full"
+            />
+            <div className="flex flex-col justify-center">
+              <p className="md:text-md font-semibold">
+                {user.username.charAt(0).toUpperCase() + user.username.slice(1)}
+              </p>
+              <p className="md:text-md text-gray-500">Free User</p>
+            </div>
           </div>
 
           <button className="cursor-pointer" onClick={handleLogout}>

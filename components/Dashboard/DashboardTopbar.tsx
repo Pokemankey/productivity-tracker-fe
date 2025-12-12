@@ -5,7 +5,14 @@ import Button from "../ui/Button";
 import CreateGoalModal from "../modals/CreateGoalModal";
 import { useState } from "react";
 
-export default function DashboardTopbar() {
+type DashboardTopbarProps = {
+  user: {
+    username: string;
+    email: string;
+  };
+};
+
+export default function DashboardTopbar({ user }: DashboardTopbarProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleCreateGoal = () => {};
@@ -15,7 +22,12 @@ export default function DashboardTopbar() {
       <div className="border-b border-gray-200 bg-white p-5 shadow-xs">
         <div className="flex justify-between">
           <div className="flex flex-col">
-            <h1 className="text-2xl font-bold">Welcome back, Poke!</h1>
+            <h1 className="text-2xl font-bold">
+              Welcome back,{" "}
+              {user.username.charAt(0).toLocaleUpperCase() +
+                user.username.slice(1)}
+              !
+            </h1>
             <p className="text-sm text-gray-500">
               Here's what's happening with your goals today
             </p>
