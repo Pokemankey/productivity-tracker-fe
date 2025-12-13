@@ -1,4 +1,7 @@
+"use client";
+
 import { Calendar, Clock } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export interface Goal {
   id: string;
@@ -18,6 +21,8 @@ type GoalProps = {
 };
 
 export default function GoalCard({ goal }: GoalProps) {
+  const router = useRouter();
+
   const progressPercent =
     goal.totalTasks === 0
       ? "0"
@@ -65,7 +70,10 @@ export default function GoalCard({ goal }: GoalProps) {
   }
 
   return (
-    <div className="flex cursor-pointer flex-col gap-3 rounded-md border border-gray-300 bg-white p-6 hover:shadow-md">
+    <div
+      className="flex cursor-pointer flex-col gap-3 rounded-md border border-gray-300 bg-white p-6 hover:shadow-md"
+      onClick={() => router.push(`/goals/${goal.id}`)}
+    >
       <div className="flex items-center gap-2">
         <div className="h-3 w-3 rounded-full bg-green-600"></div>
         <div className="flex items-center rounded-2xl bg-green-100 px-3 py-0.5">

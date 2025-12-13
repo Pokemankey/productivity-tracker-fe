@@ -1,14 +1,14 @@
 import { Target, X } from "lucide-react";
-import Button from "../ui/Button";
 import { useState } from "react";
+import Button from "../ui/Button";
 
-interface CreateGoalModalProps {
+type CreateTaskModalProps = {
   isOpen: boolean;
   onClose: () => void;
-  onSubmit: (data: GoalFormData) => void;
-}
+  onSubmit: (data: TaskFormData) => void;
+};
 
-export interface GoalFormData {
+export interface TaskFormData {
   title: string;
   description?: string;
   dueDate?: string;
@@ -16,12 +16,12 @@ export interface GoalFormData {
   color: string;
 }
 
-export default function CreateGoalModal({
+export default function CreateTaskModal({
   isOpen,
   onClose,
   onSubmit,
-}: CreateGoalModalProps) {
-  const [formData, setFormData] = useState<GoalFormData>({
+}: CreateTaskModalProps) {
+  const [formData, setFormData] = useState<TaskFormData>({
     title: "",
     description: "",
     dueDate: "",
@@ -68,33 +68,23 @@ export default function CreateGoalModal({
       <div className="absolute inset-0 bg-black/20" onClick={onClose} />
       <div className="relative z-10 w-full max-w-xl rounded-lg bg-white p-6">
         <div className="flex flex-col gap-6">
-          <div className="mb-1 flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <div className="rounded-xl bg-linear-to-br from-indigo-700 to-fuchsia-600 p-3">
-                <Target size={26} className="text-white" />
-              </div>
-              <div className="flex flex-col">
-                <h1 className="text-xl font-bold">Create New Goal</h1>
-                <p className="text-md text-gray-500">
-                  Define your next achievement
-                </p>
-              </div>
-            </div>
-            <div>
-              <X
-                size={26}
-                className="cursor-pointer text-gray-500 hover:text-black"
-                onClick={onClose}
-              />
-            </div>
+          <div className="flex items-center justify-between">
+            <h1 className="text-xl font-bold">Create New Task</h1>
+            <X
+              size={26}
+              className="cursor-pointer text-gray-500 hover:text-black"
+              onClick={onClose}
+            />
           </div>
+
+          <div className="my-1 h-0 border border-gray-100" />
 
           <div className="flex flex-col gap-2">
             <label className="block text-sm font-semibold text-gray-900">
               Goal Title
             </label>
             <input
-              placeholder="e.g., Launch Mobile App"
+              placeholder="Enter task title..."
               value={formData.title}
               onChange={(e) =>
                 setFormData({ ...formData, title: e.target.value })
@@ -108,7 +98,7 @@ export default function CreateGoalModal({
               Description <span className="text-gray-500">(Optional)</span>
             </label>
             <textarea
-              placeholder="Describe your goal and what you want to achieve..."
+              placeholder="Add task description..."
               rows={4}
               value={formData.description}
               onChange={(e) =>
@@ -153,7 +143,7 @@ export default function CreateGoalModal({
 
           <div className="flex flex-col gap-2">
             <label className="block text-sm font-semibold text-gray-900">
-              Goal Color
+              Task Color
             </label>
             <div className="flex gap-3">
               {colorOptions.map((color) => (
@@ -171,20 +161,20 @@ export default function CreateGoalModal({
                 />
               ))}
             </div>
-          </div>
 
-          <div className="my-2 h-0 border border-gray-100" />
+            <div className="my-2 h-0 border border-gray-100" />
 
-          <div className="flex items-center justify-between">
-            <div className="p-3">
-              <p
-                className="cursor-pointer text-gray-500 transition hover:text-black"
-                onClick={onClose}
-              >
-                Cancel
-              </p>
+            <div className="flex items-center justify-between">
+              <div className="p-3">
+                <p
+                  className="cursor-pointer text-gray-500 transition hover:text-black"
+                  onClick={onClose}
+                >
+                  Cancel
+                </p>
+              </div>
+              <Button onClick={handleSubmit}>Create Task</Button>
             </div>
-            <Button onClick={handleSubmit}>Create Goal</Button>
           </div>
         </div>
       </div>

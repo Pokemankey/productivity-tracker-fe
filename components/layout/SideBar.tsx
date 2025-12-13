@@ -61,7 +61,7 @@ export default function SideBar({ user }: SideBarProps) {
         <nav className="mt-5 space-y-1">
           {navigationItems.map((item) => {
             const Icon = item.icon;
-            const isActive = pathname === item.href;
+            const isActive = pathname.startsWith(item.href);
             return (
               <a
                 key={item.label}
