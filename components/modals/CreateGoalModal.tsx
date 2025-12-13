@@ -5,7 +5,7 @@ import { useState } from "react";
 interface CreateGoalModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onSubmit?: (data: GoalFormData) => void;
+  onSubmit: (data: GoalFormData) => void;
 }
 
 export interface GoalFormData {
@@ -13,7 +13,7 @@ export interface GoalFormData {
   description?: string;
   dueDate?: string;
   priority: string;
-  goalColor: string;
+  color: string;
 }
 
 export default function CreateGoalModal({
@@ -25,20 +25,28 @@ export default function CreateGoalModal({
     title: "",
     description: "",
     dueDate: "",
-    priority: "High",
-    goalColor: "indigo",
+    priority: "MEDIUM",
+    color: "indigo",
   });
 
   const handleSubmit = () => {
     if (formData.title.trim()) {
-      onSubmit?.(formData);
+      const payload = {
+        ...formData,
+        dueDate: formData.dueDate
+          ? new Date(formData.dueDate).toISOString()
+          : undefined,
+        priority: formData.priority.toLocaleUpperCase(),
+      };
+
+      onSubmit(payload);
 
       setFormData({
         title: "",
         description: "",
         dueDate: "",
-        priority: "High",
-        goalColor: "indigo",
+        priority: "MEDIUM",
+        color: "indigo",
       });
       onClose();
     }
@@ -97,7 +105,7 @@ export default function CreateGoalModal({
 
           <div className="flex flex-col gap-2">
             <label className="block text-sm font-semibold text-gray-900">
-              Description
+              Description <span className="text-gray-500">(Optional)</span>
             </label>
             <textarea
               placeholder="Describe your goal and what you want to achieve..."
@@ -152,10 +160,10 @@ export default function CreateGoalModal({
                   key={color.name}
                   type="button"
                   onClick={() =>
-                    setFormData({ ...formData, goalColor: color.name })
+                    setFormData({ ...formData, color: color.name })
                   }
                   className={`h-10 w-10 cursor-pointer rounded-lg ${color.class} transition-all hover:ring-2 hover:ring-${color.name}-500 hover:ring-offset-2 ${
-                    formData.goalColor === color.name
+                    formData.color === color.name
                       ? `ring-2 ring-${color.name}-500 ring-offset-2`
                       : ""
                   }`}

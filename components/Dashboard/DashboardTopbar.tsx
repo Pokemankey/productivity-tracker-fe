@@ -2,8 +2,9 @@
 
 import { Plus } from "lucide-react";
 import Button from "../ui/Button";
-import CreateGoalModal from "../modals/CreateGoalModal";
+import CreateGoalModal, { GoalFormData } from "../modals/CreateGoalModal";
 import { useState } from "react";
+import { createGoalAction } from "@/app/actions/goal.actions";
 
 type DashboardTopbarProps = {
   user: {
@@ -15,7 +16,10 @@ type DashboardTopbarProps = {
 export default function DashboardTopbar({ user }: DashboardTopbarProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleCreateGoal = () => {};
+  const handleCreateGoal = async (data: GoalFormData) => {
+    const NewGoal = await createGoalAction(data);
+    //TODO: Add successful completion logic. Add error handling
+  };
 
   return (
     <>
