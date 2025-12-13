@@ -1,6 +1,6 @@
 import SideBar from "@/components/layout/SideBar";
 import type { ReactNode } from "react";
-import { getCurrentUser } from "@/lib/auth/auth";
+import { getCurrentUser } from "@/lib/api/auth/auth";
 
 export default async function AuthLayout({
   children,

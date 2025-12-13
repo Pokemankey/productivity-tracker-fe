@@ -1,20 +1,16 @@
 import GoalPageTopbar from "@/components/GoalPage/GoalPageTopbar";
+import GoalsList from "@/components/GoalPage/GoalsList";
 import GoalCard from "@/components/ui/GoalCard";
 import NewGoalCard from "@/components/ui/NewGoalCard";
+import { fetchGoals } from "@/lib/api/goals/goals.api";
 
-export default function GoalPage() {
+export default async function GoalPage() {
+  const goals = await fetchGoals();
+
   return (
     <div className="flex h-screen flex-col">
       <GoalPageTopbar />
-      <div className="no-scrollbar grid auto-rows-fr gap-5 overflow-y-auto p-5 sm:grid-cols-1 md:grid-cols-3 2xl:grid-cols-4">
-        <GoalCard />
-        <GoalCard />
-        <GoalCard />
-        <GoalCard />
-        <GoalCard />
-        <GoalCard />
-        <NewGoalCard />
-      </div>
+      <GoalsList goals={goals} />
     </div>
   );
 }

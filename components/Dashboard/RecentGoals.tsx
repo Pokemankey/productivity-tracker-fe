@@ -1,6 +1,10 @@
-import GoalCard from "../ui/GoalCard";
+import GoalCard, { Goal } from "../ui/GoalCard";
 
-export default function RecentGoals() {
+type RecentGoalsProps = {
+  goals: Goal[];
+};
+
+export default function RecentGoals({ goals }: RecentGoalsProps) {
   return (
     <div className="flex flex-2 flex-col gap-5">
       <div className="flex justify-between">
@@ -9,10 +13,9 @@ export default function RecentGoals() {
       </div>
       <div className="no-scrollbar flex-1 overflow-y-auto">
         <div className="flex flex-col gap-5">
-          <GoalCard />
-          <GoalCard />
-          <GoalCard />
-          <GoalCard />
+          {goals.map((goal) => (
+            <GoalCard key={goal.id} goal={goal} />
+          ))}
         </div>
       </div>
     </div>
