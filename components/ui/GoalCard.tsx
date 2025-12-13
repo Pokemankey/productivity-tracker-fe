@@ -20,8 +20,8 @@ type GoalProps = {
 export default function GoalCard({ goal }: GoalProps) {
   const progressPercent =
     goal.totalTasks === 0
-      ? 0
-      : Math.round((goal.completedTasks / goal.totalTasks) * 100);
+      ? "0"
+      : Math.round((goal.completedTasks / goal.totalTasks) * 100).toString();
 
   function formatDueDate(dueDate?: string) {
     if (!dueDate) return "No due date";
@@ -37,6 +37,19 @@ export default function GoalCard({ goal }: GoalProps) {
         day: "numeric",
       })
     );
+  }
+
+  function getGradient(color: string) {
+    const colorGradient: Record<string, string> = {
+      indigo: "bg-linear-to-r from-indigo-600 to-purple-600",
+      green: "bg-linear-to-r from-green-600 to-emerald-700",
+      blue: "bg-linear-to-r from-blue-600 to-cyan-600",
+      purple: "bg-linear-to-r from-purple-600 to-pink-600",
+      pink: "bg-linear-to-r from-pink-600 to-rose-600",
+      orange: "bg-linear-to-r from-orange-600 to-red-600",
+    };
+
+    return colorGradient[color];
   }
 
   function formatMinutes(totalMinutes: number) {
@@ -73,7 +86,7 @@ export default function GoalCard({ goal }: GoalProps) {
 
         <div className="h-2 w-full rounded-full bg-gray-200">
           <div
-            className={`h-full w-[${progressPercent}] rounded-full bg-linear-to-r from-indigo-600 to-purple-600`}
+            className={`h-full w-[${progressPercent}%] rounded-full ${getGradient(goal.color)}`}
           />
         </div>
       </div>
