@@ -2,7 +2,7 @@
 
 import { cookies } from "next/headers";
 
-const API_URL = "http://localhost:3000";
+const API_URL = process.env.NEXT_PUBLIC_BACKEND_URL!;
 
 async function refreshSession() {
   const cookieStore = await cookies();

@@ -1,6 +1,6 @@
 import { cookies } from "next/headers";
 
-const API_URL = "http://localhost:3000";
+const API_URL = process.env.NEXT_PUBLIC_BACKEND_URL!;
 
 export async function fetchGoals() {
   const cookieStore = await cookies();

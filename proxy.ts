@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
+const API_URL = process.env.NEXT_PUBLIC_BACKEND_URL!;
+
 export async function proxy(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
@@ -25,7 +27,7 @@ export async function proxy(req: NextRequest) {
   }
 
   if (refreshToken) {
-    const refreshRes = await fetch("http://localhost:3000/auth/refresh", {
+    const refreshRes = await fetch(`${API_URL}/auth/refresh`, {
       method: "POST",
       headers: {
         Cookie: `refresh_token=${refreshToken}`,

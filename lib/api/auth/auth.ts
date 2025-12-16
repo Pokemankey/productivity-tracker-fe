@@ -1,12 +1,12 @@
 import { cookies } from "next/headers";
 
-const API_URL = "http://localhost:3000";
+const API_URL = process.env.NEXT_PUBLIC_BACKEND_URL!;
 
 export async function getCurrentUser() {
   const cookieStore = await cookies();
 
-  const cookieHeader = () => cookieStore.toString()
-  
+  const cookieHeader = () => cookieStore.toString();
+
   let res = await fetch(`${API_URL}/auth/me`, {
     headers: { Cookie: cookieHeader() },
     cache: "no-store",
