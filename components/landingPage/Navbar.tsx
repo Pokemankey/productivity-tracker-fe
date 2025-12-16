@@ -1,8 +1,11 @@
 "use client";
 import Image from "next/image";
 import Button from "../ui/Button";
+import { useRouter } from "next/navigation";
 
 export default function Navbar() {
+  const router = useRouter();
+
   return (
     <nav className="sticky top-0 z-50 w-full border-b border-gray-200 bg-white/80 backdrop-blur">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
@@ -26,10 +29,10 @@ export default function Navbar() {
         </div>
 
         <div className="hidden items-center gap-4 font-medium text-gray-700 md:flex">
-          <a href="#" className="transition hover:text-black">
+          <a href="/login" className="transition hover:text-black">
             Login
           </a>
-          <Button>Get Started</Button>
+          <Button onClick={() => router.push("/register")}>Get Started</Button>
         </div>
       </div>
     </nav>

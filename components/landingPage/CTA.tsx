@@ -1,6 +1,11 @@
+"use client";
+
 import Button from "../ui/Button";
+import { useRouter } from "next/navigation";
 
 export default function CTA() {
+  const router = useRouter();
+
   return (
     <section className="w-full bg-linear-to-r from-indigo-600 to-purple-600 px-10 py-24">
       <div className="mx-auto flex max-w-4xl flex-col items-center justify-center gap-3">
@@ -11,7 +16,11 @@ export default function CTA() {
           Join thousands of users achieving their goals with FlowState
         </p>
         <div className="mt-8">
-          <Button variant="secondary" size="lg">
+          <Button
+            variant="secondary"
+            size="lg"
+            onClick={() => router.push("/register")}
+          >
             Register Now
           </Button>
         </div>

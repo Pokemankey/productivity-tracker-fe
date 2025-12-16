@@ -2,8 +2,11 @@
 
 import Image from "next/image";
 import Button from "../ui/Button";
+import { useRouter } from "next/navigation";
 
 export default function Hero() {
+  const router = useRouter();
+
   return (
     <section className="w-full bg-[#EEF2FF] py-24">
       <div className="mx-auto flex max-w-7xl flex-col gap-12 px-10 md:flex-row md:items-center">
@@ -26,13 +29,15 @@ export default function Hero() {
           </p>
 
           <div className="flex w-full justify-center md:max-w-lg">
-            <Button size="lg">Get Started</Button>
+            <Button size="lg" onClick={() => router.push("/register")}>
+              Get Started
+            </Button>
           </div>
         </div>
 
         <div className="flex w-full items-center justify-center md:w-1/2 md:justify-end">
           <Image
-            src="/LandingPageCard.png"
+            src="/LandingPageCard.svg"
             alt="Goal Card"
             className="w-full max-w-md md:max-w-none"
             width={2000}
