@@ -3,12 +3,16 @@
 import Button from "@/components/ui/Button";
 import { Plus } from "lucide-react";
 import { useState } from "react";
-import CreateTaskModal from "../modals/CreateTaskModal";
+import CreateTaskModal, { TaskFormData } from "../modals/CreateTaskModal";
+import { createTaskAction } from "@/app/actions/task.actions";
 
 export default function TaskListTopbar() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleCreateTask = () => {};
+  const handleCreateTask = async (payload: TaskFormData) => {
+    const newTask = await createTaskAction(payload);
+    //TODO: Add successful completion logic. Add error handling
+  };
 
   return (
     <>

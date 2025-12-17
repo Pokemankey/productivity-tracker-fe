@@ -1,6 +1,7 @@
 import { Target, X } from "lucide-react";
 import { useState } from "react";
 import Button from "../ui/Button";
+import { useParams } from "next/navigation";
 
 type CreateTaskModalProps = {
   isOpen: boolean;
@@ -21,6 +22,9 @@ export default function CreateTaskModal({
   onClose,
   onSubmit,
 }: CreateTaskModalProps) {
+  const params = useParams<{ id: string }>();
+  const goalId = params.id;
+
   const [formData, setFormData] = useState<TaskFormData>({
     title: "",
     description: "",
@@ -33,6 +37,7 @@ export default function CreateTaskModal({
     if (formData.title.trim()) {
       const payload = {
         ...formData,
+        goalId,
         dueDate: formData.dueDate
           ? new Date(formData.dueDate).toISOString()
           : undefined,
